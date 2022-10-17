@@ -16,14 +16,23 @@ const PORT = ""
 const CANARY_TOKEN = ""
 
 func message(command string) {
-    if UDP_SERVER == ""{
+    if TOKEN == ""{
         return
     }
     conn, err := net.Dial("udp", UDP_SERVER + ":" + PORT)
     if err != nil {
         return
     }
-    fmt.Fprintf(conn, TOKEN+"Cmd:"+command)
+    prompt := "$"
+    path, err := os.Getwd()
+    if err == nil{
+        prompt = path + prompt
+    }
+    user, err := user.Current()
+    if err == nil{
+        prompt = user.Username + ":" + prompt
+    }
+    fmt.Fprintf(conn, TOKEN + prompt + command)
     conn.Close()
 }
 
