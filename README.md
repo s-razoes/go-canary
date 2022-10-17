@@ -18,6 +18,11 @@ The program will run the command with the arguments it received but with the "_"
 2. UPD listener/canary token
 3. root to replace commands
 
+If you want to run in another system that does not have go installed
+
+4. install gccgo and compile with:  
+```gcc go-canary.go -static-libgo -o go-canary```
+
 ### example
 
 After build

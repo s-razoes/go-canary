@@ -4,7 +4,7 @@ import (
     "fmt"
     "os/exec"
     "os"
-    "strings"
+    "path/filepath"
     "net"
 )
 
@@ -47,15 +47,18 @@ func canary_token(){
 func main() {
     canary_token()
     message(strings.Join(os.Args," "))
+    //get the current executable and its arguments
     args := os.Args[1:]
-    split := strings.Split(os.Args[0], "/")
-    app := "_" + split[len(split)-1]
+    _, file := filepath.Split(os.Args[0])
+    app := "_" + file
+    
     cmd := exec.Command(app, args...)
     stdout, err := cmd.Output()
-
+    //send errors to stderr
     if err != nil {
         fmt.Fprintf(os.Stderr,err.Error())
-        return
     }
-    fmt.Fprintf(os.Stdout,string(stdout))
+    if stdout != nil && stdout != ""{
+        fmt.Fprintf(os.Stdout,string(stdout))
+    }
 }
