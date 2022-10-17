@@ -1,0 +1,33 @@
+# go-canary
+
+The point of this go program is to "override" any command the user would like to be used as an alarm when invoked.
+
+## how it works
+The program will run the command with the arguments it received but with the "_" added in the begining of the name.
+
+## How to use it
+
+1. add the token, server, port or canary token to it
+2. compile it in the folder using ```go build .```
+3. copy the command you'd like to "_" on the begining of it's name
+4. copy the generated executable to the (from step 2) to the command path
+
+### example
+
+After build
+```shell
+sudo cp /usr/bin/whoami /usr/bin/_whoami
+sudo cp go-canary /usr/bin/whoami
+```
+
+Don't forget to test it.
+```shell
+whoami
+```
+You can always execute the original
+```shell
+_whoami
+```
+All set
+
+You can do this to as many commands as you like. :)
