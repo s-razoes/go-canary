@@ -12,6 +12,12 @@ The program will run the command with the arguments it received but with the "_"
 3. copy the command you'd like to "_" on the begining of it's name
 4. copy the generated executable to the (from step 2) to the command path
 
+### requires
+
+1. go compiler
+2. UPD listener/canary token
+3. root to replace commands
+
 ### example
 
 After build
@@ -28,6 +34,14 @@ You can always execute the original
 ```shell
 _whoami
 ```
-All set
 
+All set.
 You can do this to as many commands as you like. :)
+
+### canary tokens
+
+> I do not recommend canary tokens, it's too slow, would alert the attacker.
+
+### why?
+
+> Well UDP is faster and I want it all to run without alerting the attacker.
