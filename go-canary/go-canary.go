@@ -6,6 +6,7 @@ import (
     "os"
     "path/filepath"
     "net"
+    "io"
 )
 
 //DO NOT FORGET TO ADD THESE VALUES OR IT WILL DO NOTHING
@@ -53,12 +54,22 @@ func main() {
     app := "_" + file
     
     cmd := exec.Command(app, args...)
-    stdout, err := cmd.Output()
-    //send errors to stderr
-    if err != nil {
-        fmt.Fprintf(os.Stderr,err.Error())
+    //this is better then run because it pipes stdout and stderr to stderr and stdout
+    stdout, _ := cmd.StdoutPipe()
+    stderr, _ := cmd.StderrPipe()
+    cmd.Start();
+    serr, _ := io.ReadAll(stderr)
+    sout, _ := io.ReadAll(stdout)
+
+    if serr != nil{
+        fmt.Fprintf(os.Stderr,string(serr))
     }
-    if stdout != nil && stdout != ""{
-        fmt.Fprintf(os.Stdout,string(stdout))
+    if sout != nil{
+        fmt.Fprintf(os.Stdout,string(sout))
+    }
+    err := cmd.Wait()
+    //if it failed to get an error return error
+    if err != nil{
+        os.Exit(1)
     }
 }
