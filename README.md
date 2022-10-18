@@ -14,16 +14,17 @@ The program will run the command with the arguments it received but with the "_"
 
 ### requires
 
-1. go compiler
-2. UPD listener/canary token
-3. root to replace commands
+1. Linux OS
+2. go compiler(v1.16 or higher)
+3. UPD listener/canary token
+4. root to replace commands
 
 If you want to run in another system that does not have go installed
 
-4. install gccgo and compile with:  
+5. install gccgo and compile with:  
 ```gcc go-canary.go -static-libgo -o go-canary```
 
-### example
+### example for command **whoami** 
 
 After build
 ```shell
@@ -43,14 +44,31 @@ _whoami
 All set.
 You can do this to as many commands as you like. :)
 
-### canary tokens
+## logs for stack executing
+
+The execution will generate a file that is the result of the execution of:
+> ps faux
+
+Into:
+
+> LOG_FILE_PATH + command executed + . + 10 random characters + .log
+
+The above example will generate the file:
+
+> /tmp/whoami.XXXXXXXXXX.log
+
+## canary tokens
 
 > I do not recommend canary tokens, it's too slow, would alert the attacker.
 
-### why?
+## why?
 
 > Well UDP is faster and I want it all to run without alerting the attacker.
 
-### Also, very important
+## Also, very important
 
 Use at your own descretion, careful what you replace
+
+### TODO
+
+* Make a version for older versions of go and gccgo
