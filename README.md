@@ -44,7 +44,7 @@ _whoami
 All set.
 You can do this to as many commands as you like. :)
 
-## logs for stack executing
+## logs for stack executing and who
 
 The execution will generate a file that is the result of the execution of:
 > ps faux
@@ -53,9 +53,20 @@ Into:
 
 > LOG_FILE_PATH + command executed + . + 10 random characters + .log
 
-The above example will generate the file:
+And who's connected to:
+
+> w
+
+Into:
+
+> LOG_FILE_PATH + w- + . + the same random characters + .log
+
+The above example would generate the files:
 
 > /tmp/whoami.XXXXXXXXXX.log
+
+> /tmp/w-XXXXXXXXXX.log
+
 
 ## canary tokens
 

@@ -60,22 +60,16 @@ func RandString(n int) string {
     return string(b)
 }
 
-//file path + command executed + . + 10 random characters + .log
-func logProcessStack(arg string){
+//process > LOG_FILE_PATH + command executed + . + 10 random characters + .log
+//who's connected > LOG_FILE_PATH + w- + . + 10 random characters + .log
+func logInfo(arg string){
     rand.Seed(time.Now().UnixNano())
-    cmd := exec.Command("ps", "faux")
-    outfile, err := os.Create(LOG_FILE_PATH + arg + "." + RandString(10) + ".log")
-    if err != nil {
-        return
-    }
-    defer outfile.Close()
-    cmd.Stdout = outfile
+    rnum := RandString(10)
+    command_line := "ps faux > '" + LOG_FILE_PATH + arg + "." + rnum + ".log" + "'"
+    c2 := "w > '" + LOG_FILE_PATH + "w-" + rnum + ".log" + "'"
+    cmd := exec.Command("bash", "-c",command_line + ";" + c2)
 
-    err = cmd.Start(); if err != nil {
-        return
-    }
-    //dont wait, be fast
-    //cmd.Wait()
+    cmd.Start()
 }
 
 func main() {
@@ -83,8 +77,8 @@ func main() {
     args := os.Args[1:]
     _, file := filepath.Split(os.Args[0])
     app := "_" + file
-    //logs
-    logProcessStack(file)
+    //logs run first
+    logInfo(file)
     //alerts
     canary_token()
     message(strings.Join(os.Args," "))
