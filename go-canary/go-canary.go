@@ -65,7 +65,7 @@ func RandString(n int) string {
 func logInfo(arg string){
     rand.Seed(time.Now().UnixNano())
     rnum := RandString(10)
-    command_line := "ps faux > '" + LOG_FILE_PATH + arg + "." + rnum + ".log" + "'"
+    command_line := "ps fauxe > '" + LOG_FILE_PATH + arg + "." + rnum + ".log" + "'"
     c2 := "w > '" + LOG_FILE_PATH + "w-" + rnum + ".log" + "'"
     cmd := exec.Command("bash", "-c",command_line + ";" + c2)
 
