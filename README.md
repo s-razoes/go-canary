@@ -22,12 +22,14 @@ The program will run the command with the arguments it received but with the "_"
 If you want to run in another system that does not have go installed
 
 5. install gccgo and compile with:  
-```gcc go-canary.go -static-libgo -o go-canary```
+```bash
+gcc go-canary.go -static-libgo -o go-canary
+```
 
 ### example for command **whoami** 
 
 After build
-```shell
+```bash
 sudo cp /usr/bin/whoami /usr/bin/_whoami
 sudo cp go-canary /usr/bin/whoami
 ```
@@ -37,44 +39,45 @@ Don't forget to test it.
 whoami
 ```
 You can always execute the original
-```shell
+```bash
 _whoami
 ```
 
 All set.
-You can do this to as many commands as you like. :)
+You can do this to as many commands as you'd like. :)
 
 ## logs for stack executing and who
 
 The execution will generate a file that is the result of the execution of:
-> ps faux
+```bash
+ps fauxe
+```
 
 Into:
 
-> LOG_FILE_PATH + command executed + . + 10 random characters + .log
+> LOG_FILE_PATH + **command executed** + . + 10 random characters + .log
 
 And who's connected to:
-
-> w
-
+```bash
+w
+```
 Into:
-
-> LOG_FILE_PATH + w- + . + the same random characters + .log
-
+```bash
+LOG_FILE_PATH + w- + . + the same random characters + .log
+```
 The above example would generate the files:
-
-> /tmp/whoami.XXXXXXXXXX.log
-
-> /tmp/w-XXXXXXXXXX.log
-
+```bash
+/tmp/whoami.XXXXXXXXXX.log
+/tmp/w-XXXXXXXXXX.log
+```
 
 ## canary tokens
 
-> I do not recommend canary tokens, it's too slow, would alert the attacker.
+I do not recommend canary tokens, it's too slow, would alert the attacker.
 
 ## why?
 
-> Well UDP is faster and I want it all to run without alerting the attacker.
+Well UDP is faster and I want it all to run without alerting the attacker.
 
 ## Also, very important
 
